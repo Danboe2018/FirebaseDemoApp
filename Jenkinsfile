@@ -2,11 +2,15 @@ pipeline {
     agent {
         label 'android'
     }
+    options {
+        timeout(time: 10, unit: 'MINUTES') 
+    }
     stages {
         stage('clean') {
             steps { 
                 echo 'Cleaning..'
                 sh './gradlew clean'
+                sh './gradlew lintFix'
             }
         }
         stage('Build') {
